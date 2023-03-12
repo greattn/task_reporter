@@ -1,0 +1,9 @@
+#main {
+  padding: 10px 20px;
+  width: 500px;
+}
+
+#report-content {
+  min-height: 300px;
+  resize: none;
+}

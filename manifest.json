@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Task reporter",
+  "version": "0.1.0",
+  "description": "Sun* task reporter",
+  "action": {
+    "default_icon": "images/icon-16.png",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://pherusa-redmine.sun-asterisk.vn/*"],
+      "js": ["jquery-3.6.4.min.js", "scripts/content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  }
+}
