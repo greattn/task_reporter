@@ -1,16 +1,18 @@
 // Add buttons to the list tasks
 let task_list_table = $("table.list.issues");
 let tbody_table = task_list_table.children("tbody")
-task_list_table.children("thead").children("tr").prepend("<th>Next day</th>");
-task_list_table.children("thead").children("tr").prepend("<th>Today</th>");
+task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Next day</th>");
+task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Today</th>");
 
 let report_col = tbody_table.children("tr")
 report_col.prepend("<td class='report-task-col next-day-col'></td>").append
 report_col.prepend("<td class='report-task-col today-col'></td>").append
 let today_row = $(".today-col")
 let next_day_row = $(".next-day-col")
-let today_btn = $('<input/>').attr({ type: 'checkbox', name:'today-btn', value:'Today', class: "today-btn"});
-let next_day_btn = $('<input/>').attr({ type: 'checkbox', name:'next-day-btn', value:'Next day', class: "next-day-btn"});
+let today_btn = $('<input/>').attr({ type: 'checkbox', name:'today-btn', value:'Today', class: "today-btn", style: "transform: scale(1.3); accent-color: #017BFE;"});
+let next_day_btn = $('<input/>').attr({ type: 'checkbox', name:'next-day-btn', value:'Next day', class: "next-day-btn", style: "transform: scale(1.3); accent-color: #017BFE;"});
+
+remove_local_data();
 
 today_row.append(today_btn)
 next_day_row.append(next_day_btn)
@@ -25,7 +27,7 @@ $(".today-btn").change(function () {
     today_tasks.push(get_data(row_data));
   })
 
-  send_data_to_background(today_tasks);
+  send_data_to_background("today", today_tasks);
 })
 
 $(".next-day-btn").change(function () {
@@ -37,7 +39,7 @@ $(".next-day-btn").change(function () {
     next_day_tasks.push(get_data(row_data));
   })
 
-  send_data_to_background(next_day_tasks);
+  send_data_to_background("next_day", next_day_tasks);
 })
 
 function get_data(row_data) {
@@ -54,6 +56,11 @@ function get_data(row_data) {
   return obj;
 }
 
-function send_data_to_background(data) {
-  chrome.runtime.sendMessage({ data: data });
+function send_data_to_background(type, data) {
+  chrome.runtime.sendMessage({type: type, data: data });
+}
+
+function remove_local_data() {
+  chrome.storage.local.remove("today_data");
+  chrome.storage.local.remove("next_day_data");
 }
