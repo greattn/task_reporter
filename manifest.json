@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Task reporter",
   "version": "0.1",
-  "description": "Sun* task reporter",
+  "description": "Task reporter by PhongTran",
   "action": {
     "default_icon": "images/icon-16.png",
     "default_popup": "popup/popup.html"

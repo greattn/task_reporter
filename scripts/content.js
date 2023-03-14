@@ -4,7 +4,7 @@ let tbody_table = task_list_table.children("tbody")
 task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Next day</th>");
 task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Today</th>");
 
-let report_col = tbody_table.children("tr")
+let report_col = tbody_table.children("tr.hascontextmenu")
 report_col.prepend("<td class='report-task-col next-day-col'></td>").append
 report_col.prepend("<td class='report-task-col today-col'></td>").append
 let today_row = $(".today-col")
