@@ -9,10 +9,14 @@ report_col.prepend("<td class='report-task-col next-day-col'></td>").append
 report_col.prepend("<td class='report-task-col today-col'></td>").append
 let today_row = $(".today-col")
 let next_day_row = $(".next-day-col")
-let today_btn = $('<input/>').attr({ type: 'checkbox', name:'today-btn', value:'Today', class: "today-btn", style: "transform: scale(1.3); accent-color: #017BFE;"});
-let next_day_btn = $('<input/>').attr({ type: 'checkbox', name:'next-day-btn', value:'Next day', class: "next-day-btn", style: "transform: scale(1.3); accent-color: #017BFE;"});
-
+let today_btn = $('<input/>').attr({ type: 'checkbox', name:'today-btn', value:'Today', class: "today-btn", style: "transform: scale(1.2); accent-color: #017BFE;"});
+let next_day_btn = $('<input/>').attr({ type: 'checkbox', name:'next-day-btn', value:'Next day', class: "next-day-btn", style: "transform: scale(1.2); accent-color: #017BFE;"});
+let report_task_col = $(".report-task-col");
 remove_local_data();
+
+report_task_col.click(function(e) {
+  e.stopPropagation();
+});
 
 today_row.append(today_btn)
 next_day_row.append(next_day_btn)

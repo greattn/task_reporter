@@ -33,10 +33,7 @@ function push_data_to_textarea(data) {
     textarea_element.value = "1. Today tasks:"
     data.forEach(item => {
       let format = `
-      - Ticket's link: ${item.id}
-      - Task's Title: ${item.title}
-      - Status: ${item.status}
-      - % Done: ${item.done_status}\n`
+      - ${item.id} | ${item.title} | ${item.status} | ${item.done_status}\n`
       textarea_element.value += format
     })
   }
