@@ -1,9 +1,9 @@
 #main {
   padding: 10px 20px;
-  width: 600px;
+  width: 500px;
 }
 
-#report-content {
-  min-height: 300px;
+#task-content {
+  min-height: 200px;
   resize: none;
 }
