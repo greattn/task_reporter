@@ -17,41 +17,60 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function copy_to_clipboard() {
-  var copyText = document.getElementById("report-content");
+  var taskContent = document.getElementById("task-content");
 
   // Select the text field
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); // For mobile devices
+  taskContent.select();
+  taskContent.setSelectionRange(0, 99999); // For mobile devices
+
+
+  var issueContent = document.getElementById("issue-content");
+
+  // Select the text field
+  issueContent.select();
+  issueContent.setSelectionRange(0, 99999); // For mobile devices
+
+  var currentDate = new Date().toJSON().slice(0, 10)
+
+  var reportText = `
+    [${currentDate}] Daily Report
+    Issues:
+    ${issueContent.value}
+    ------------------------------
+    ${taskContent.value}
+  `
 
   // Copy the text inside the text field
-  navigator.clipboard.writeText(copyText.value);
+  navigator.clipboard.writeText(reportText);
 };
 
+
 function push_data_to_textarea(data) {
-  let textarea_element = document.getElementById("report-content")
+  let textarea_element = document.getElementById("task-content")
   if(textarea_element) {
-    textarea_element.value = "1. Today tasks:"
+    textarea_element.value += `Today tasks:`
     data.forEach(item => {
       let format = `
-      - ${item.id} | ${item.title} | ${item.status} | ${item.done_status}\n`
+      - \t ${item.id} | ${item.done_status} | ${item.title}
+        \t ${item.status}\n`
       textarea_element.value += format
     })
+    textarea_element.value += `
+    ------------------------------\n`
   }
 }
 
 function push_next_day_data_to_textarea(data) {
-  let textarea_element = document.getElementById("report-content")
+  let textarea_element = document.getElementById("task-content")
   if(textarea_element) {
-    textarea_element.value += `\r------------------------------\n2. Next day tasks:`
+    textarea_element.value += `\t\tNext day tasks:`
     data.forEach(item => {
       let format = `
-      - Ticket's link: ${item.id}
-      - Task's Title: ${item.title}
+      - \t https://pherusa-redmine.sun-asterisk.vn/issues/${item.id}
+        \t ${item.title}
       `
       textarea_element.value += format
     })
-    textarea_element.value += `\r------------------------------\n3. Other tasks (If any):`
-    textarea_element.value += `\r------------------------------\n4. Issue (If any):`
   }
 }
 
