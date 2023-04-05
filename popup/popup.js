@@ -30,7 +30,10 @@ function copy_to_clipboard() {
   issueContent.select();
   issueContent.setSelectionRange(0, 99999); // For mobile devices
 
+  var currentDate = new Date().toJSON().slice(0, 10)
+
   var reportText = `
+    [${currentDate}] Daily Report
     Issues:
     ${issueContent.value}
     ------------------------------
