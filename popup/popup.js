@@ -63,7 +63,7 @@ function push_data_to_textarea(data) {
 function push_next_day_data_to_textarea(data) {
   let textarea_element = document.getElementById("task-content")
   if(textarea_element) {
-    textarea_element.value += `\t\tNext day tasks:`
+    textarea_element.value += `   Next day tasks:`
     data.forEach(item => {
       let format = `
       - \t https://pherusa-redmine.sun-asterisk.vn/issues/${item.id}

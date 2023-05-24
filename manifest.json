@@ -9,7 +9,10 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://pherusa-redmine.sun-asterisk.vn/projects/*"],
+      "matches": [
+        "https://pherusa-redmine.sun-asterisk.vn/projects/*",
+        "https://pherusa-redmine.sun-asterisk.vn/my/page"
+      ],
       "js": ["jquery-3.6.4.min.js", "scripts/content.js"]
     }
   ],

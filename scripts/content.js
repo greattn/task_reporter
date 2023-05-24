@@ -47,13 +47,24 @@ $(".next-day-btn").change(function () {
 })
 
 function get_data(row_data) {
-  let obj = new Object();
+  let obj = {
+    id: "",
+    title: "",
+    status: "",
+    target_version: "",
+    done_status: "",
+    est_time: "",
+    spent_time: ""
+  };
 
   obj.id = row_data.children(".id").children().text(); //id
   obj.title = row_data.children(".subject").children().text(); // title
   obj.status = row_data.children(".status").text(); //status
   obj.target_version = row_data.children(".fixed_version").children().text(); //target version
-  obj.done_status = row_data.children(".done_ratio").children()[0].innerText; // % done
+  obj.done_status =
+    row_data.children(".done_ratio").children()[0] ?
+    row_data.children(".done_ratio").children()[0].innerText :
+    "N/A" // % done
   obj.est_time = row_data.children(".estimated_hours").text(); //estimated hours
   obj.spent_time = row_data.children(".spent_hours").text(); //spent hours
 
