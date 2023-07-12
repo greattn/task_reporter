@@ -4,6 +4,15 @@ let tbody_table = task_list_table.children("tbody")
 task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Next day</th>");
 task_list_table.children("thead").children("tr").prepend("<th style='color: #017BFE'>Today</th>");
 
+$(".issues thead .total_spent_hours").after("<th style='color: #017BFE'>Remain times</th>");
+$(".issues tbody .total_spent_hours").after("<td class='total_remain_hours'> Remain times</td>");
+
+$(".issues tbody .total_remain_hours").each(function( index ) {
+  est = parseInt($(this).parent().find("td.total_estimated_hours").text())
+  spent = parseInt($(this).parent().find("td.total_spent_hours").text())
+  $( this ).text(est - spent)
+});
+
 let report_col = tbody_table.children("tr.hascontextmenu")
 report_col.prepend("<td class='report-task-col next-day-col'></td>").append
 report_col.prepend("<td class='report-task-col today-col'></td>").append
@@ -14,6 +23,11 @@ let next_day_btn = $('<input/>').attr({ type: 'checkbox', name:'next-day-btn', v
 let report_task_col = $(".report-task-col");
 remove_local_data();
 
+let total_for_spent_hours = parseInt($(".query-totals .total-for-spent-hours span.value").text())
+let total_for_estimated_hours = parseInt($(".query-totals .total-for-estimated-hours span.value").text())
+let total_for_remain_hours = total_for_estimated_hours - total_for_spent_hours
+total_for_remain_html = `<span class="total-for-remain-hours"><span>Remain time:</span> <span class="value">${total_for_remain_hours}</span></span>`
+$(".query-totals .total-for-spent-hours").after(total_for_remain_html) 
 report_task_col.click(function(e) {
   e.stopPropagation();
 });
